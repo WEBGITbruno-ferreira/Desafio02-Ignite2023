@@ -11,7 +11,7 @@ export const HomeContainer = styled.main`
   justify-content: center;
   margin-top: 6.2rem;
   border: 1px solid green;
-  width: 100vw;
+  width: 99vw;
   height: 25.75rem;
   padding :0  15rem 0 15rem;
 

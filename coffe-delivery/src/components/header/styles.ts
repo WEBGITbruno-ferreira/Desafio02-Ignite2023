@@ -11,6 +11,7 @@ export const HeaderContainer = styled.header`
   width: 100%;
   overflow: hidden;
   background-color: ${(props) => props.theme['background']};
+  z-index: 10;
 
  
 

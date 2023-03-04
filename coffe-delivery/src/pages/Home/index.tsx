@@ -1,8 +1,7 @@
 import { HomeContainer } from "./styles"
 import CoffeHomeImg from '../../assets/CoffeHome.png'
 import {ShoppingCart, Package, Timer, Coffee} from 'phosphor-react'
-import { ItemMenuContainer } from "../../components/itemMenu/styles"
-import { ItemMenu } from "../../components/itemMenu"
+import { Cardapio } from "../../components/cardapio"
 
 export function Home() {
 
@@ -23,6 +22,6 @@ export function Home() {
                 <div className="rightContent"> <img src={CoffeHomeImg} alt=""/> </div>
             </HomeContainer>
             {/* colocar dentro de um cardápioContainer */}
-            <ItemMenu/>
+            <Cardapio/>
         </>)
 }

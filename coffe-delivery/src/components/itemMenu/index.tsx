@@ -6,13 +6,10 @@ export function ItemMenu() {
     return (
     <>
     <ItemMenuContainer>
-        <img src="../assets/Americano.png" alt="" />
+        <div> <img src="src\assets\Americano.png" alt="" /> </div> 
 
     </ItemMenuContainer>
-    <ItemMenuContainer>
-        <h1> Café</h1>
 
-    </ItemMenuContainer>
     </>
     )
 }

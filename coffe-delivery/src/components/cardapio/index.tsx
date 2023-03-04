@@ -10,9 +10,17 @@ export function Cardapio() {
     return (
         <>
             <CardapioContainer>
+                <p> Nossos cafés</p>
+                <div className='ItensGrid'>
                 <ItemMenu/>
                 
                 <ItemMenu/>
+
+                <ItemMenu/>
+
+                <ItemMenu/>
+
+                </div>
               
 
 
