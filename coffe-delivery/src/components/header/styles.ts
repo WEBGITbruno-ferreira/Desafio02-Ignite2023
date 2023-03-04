@@ -5,12 +5,13 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
   border: 1px solid red;
-  padding: 2rem 8rem;
+  padding: 2rem 15rem;
   position: fixed;
   top:  0;
   width: 100%;
   overflow: hidden;
   background-color: ${(props) => props.theme['background']};
+
  
 
   nav {
