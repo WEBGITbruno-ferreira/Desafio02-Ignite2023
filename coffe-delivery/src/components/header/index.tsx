@@ -9,9 +9,9 @@ export function Header() {
       <img src={logoCoffe} alt="" />
       <nav>
         <NavLink to="/" title="Timer">
-          <MapPin size={24} />
+          <MapPin size={24}   /> <label htmlFor="textLocation">Cotia, SP</label>
         </NavLink>
-        <NavLink to="/history" title="Histórico">
+        <NavLink to="/cart" title="Histórico">
           <ShoppingCart size={24} />
         </NavLink>
       </nav>

@@ -17,26 +17,47 @@ export const HeaderContainer = styled.header`
 
   nav {
     display: flex;
-    gap: 5rem;
+    gap: 0.5rem;
 
     a {
-      width: 3rem;
+      width: 8rem;
       height: 3rem;
       display: flex;
       justify-content: center;
       align-items: center;
-
-   /* color: ${(props) => props.theme['gray-100']}; */
+      border-radius: 6px;
       border-top: 3px solid transparent;
       border-bottom: 3px solid transparent;
+      color: ${(props) => props.theme['purple']}; 
+      background-color: ${(props) => props.theme['purple-light']}; 
+      text-decoration: none;
+ 
+
+
+
+    }
+
+    a+a{
+      width: 3rem;
+      color: ${(props) => props.theme['yellow-dark']}; 
+      background-color: ${(props) => props.theme['yellow-light']}; 
+
+      
+      circle { fill : ${(props) => props.theme['yellow-dark']}}
+
+      circle+path { fill : ${(props) => props.theme['yellow-dark']}}
+
+ 
 
       &:hover {
-     //   border-bottom: 3px solid ${(props) => props.theme['green-500']};
-      }
+        border-bottom: 3px solid ${(props) => props.theme['yellow-dark']};
+      };
+
 
       &.active {
-    //    color: ${(props) => props.theme['green-500']};
+        color: green;
       }
     }
   }
+
 `

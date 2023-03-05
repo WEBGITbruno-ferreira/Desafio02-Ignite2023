@@ -20,6 +20,13 @@ export function Cardapio() {
 
                 <ItemMenu/>
 
+                <ItemMenu/>
+                
+                <ItemMenu/>
+
+                <ItemMenu/>
+
+
                 </div>
               
 
