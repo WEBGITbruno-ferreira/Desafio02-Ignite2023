@@ -8,7 +8,7 @@ export const HeaderContainer = styled.header`
   padding: 2rem 15rem;
   position: fixed;
   top:  0;
-  width: 100%;
+  width: 98vw;
   overflow: hidden;
   background-color: ${(props) => props.theme['background']};
   z-index: 10;

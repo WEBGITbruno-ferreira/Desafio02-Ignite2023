@@ -8,16 +8,27 @@ export const CheckoutContainer = styled.div`
 
   align-items: top;
   border: 1px solid blue;
-  width: 75vw;
-  margin :6.2rem  15rem 0 15rem; //troquei o padding por margin, vamos ver o efeito no alinhamento
+  width: 98vw;
+  margin :6.2rem  auto 0 auto; //troquei o padding por margin, vamos ver o efeito no alinhamento
+  padding: 0 5rem;
   background-color : ${(props) => props.theme['white']};
- /* 
-  div { display: flex;
-        border: 1px solid red;
-        justify-content: left;
-        align-items: top;
 
-}*/
+@media (max-width: 1350px) {
+ 
+    }
+
+    @media (max-width: 1105px) {
+      margin :6.2rem  auto 0 auto;
+      padding: 1rem;
+ 
+    }
+
+    @media (max-width: 815px) {
+      margin :6.2rem  auto 0 auto;
+      padding: 1rem;
+      grid-template-columns: 1fr ;
+    }
+
 
 `
 export const AreaLabel = styled.div`

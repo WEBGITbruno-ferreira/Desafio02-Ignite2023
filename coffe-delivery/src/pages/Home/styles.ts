@@ -2,31 +2,37 @@
 import styled from 'styled-components'
 
 export const HomeContainer = styled.main`
-
+  border: 3px solid green;
   display: inline-flex;
   overflow: hidden;
   flex-wrap: nowrap;  
   gap: 1rem;
   align-items: flex-start;
   justify-content: center;
-  margin-top: 6.2rem;
+ 
   border: 1px solid green;
-  width: 99vw;
+  width: 100vw;
   height: 25.75rem;
   padding :0  15rem 0 15rem;
+  
+  background-color: ${(props) => props.theme['background']};
+  width: 98vw;
+  max-width: 98vw;
+  margin: 6.2rem  auto 0 auto;
 
   .leftContent {
     display: flex;
    // background-color : red;
-    width : 50vw;
+    width : 49vw;
     flex-direction: column;
+   
 
     
     h1 {
       font-family: 'Baloo 2', cursive;
-      font-size : 3.5rem;
+      font-size : 3.0rem;
       font-weight: bold;
-      line-height: 120%;
+      line-height: 100%;
       margin-bottom: 1rem;
  
     }
@@ -35,8 +41,8 @@ export const HomeContainer = styled.main`
           font-family: 'Roboto';
           font-style: normal;
           font-weight: 400;
-          font-size: 1.5rem;
-          line-height: 130%;
+          font-size: 1.2rem;
+          line-height: 100%;
           margin-bottom: 1rem;
     }
 
@@ -109,7 +115,8 @@ export const HomeContainer = styled.main`
 
   .rightContent {
     //background-color : blue;
-    width : 50vw;
+    max-width: 100%;
+    height: 80%;
     display: flex;
     justify-content: center;
     

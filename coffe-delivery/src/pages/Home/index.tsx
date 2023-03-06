@@ -22,6 +22,6 @@ export function Home() {
                 <div className="rightContent"> <img src={CoffeHomeImg} alt=""/> </div>
             </HomeContainer>
             {/* colocar dentro de um cardápioContainer */}
-            <Cardapio/>
+            <Cardapio/> 
         </>)
 }
