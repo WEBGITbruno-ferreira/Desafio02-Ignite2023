@@ -1,8 +1,8 @@
-import { ItemMenuContainer, MinusAndPlusSelector } from './styles'
+import { AlignItemAndButton, ItemMenuContainer, MinusAndPlusSelector, RemoveButton } from './styles'
 
-import {  ShoppingCart } from 'phosphor-react'
-import { NavLink } from 'react-router-dom'
+import {  CreditCard, ShoppingCart, Trash } from 'phosphor-react'
 import { useState } from 'react'
+import { PaymentTypeButton } from '../../pages/Checkout/styles';
 export function ItemMenu() {
     const [quantityOfItem, setquantityOfItem] = useState(1)
     function handleAddItem() {
@@ -28,28 +28,26 @@ export function ItemMenu() {
     <>
     <ItemMenuContainer>
         <div className='productImage'> <img src="src\assets\Americano.png" alt="" /> </div> 
-        <span> Tradicional </span>
-
-        <h1> Tradicional </h1>
-        <h6> O tradicional café feito com água quente e grãos moídos </h6>
-        <div className="priceAndQuant"> <p className='moeda'> R$ </p > <p  className='value'> 9,90 </p > 
-       {/* <QuantityInput
-         type="number"
-         placeholder="1"
-         step="1"
-         min="1"
         
-    />  */}
-
+        <AlignItemAndButton>
+        <h1> Tradicional </h1>
+        <div className="priceAndQuant"> 
+        
         <MinusAndPlusSelector className="number">
             <span onClick={() => handleSubItem()} className="minus">-</span>
             <input type="text" onChange={()=> {}} value={quantityOfItem}/>
             <span onClick={() => handleAddItem()} className="plus">+</span>
         </MinusAndPlusSelector>
-        <label onClick={() => addToCart()} className='addToCart'> <ShoppingCart size={22}/>  </label>
+        <RemoveButton  > <Trash size={22}/>REMOVER</RemoveButton>  
+
+       </div> 
+        
+       </AlignItemAndButton>
 
 
-        </div> 
+      
+
+        <p className='moeda'> R$ </p > <p  className='value'> 9,90 </p > 
 
 
 

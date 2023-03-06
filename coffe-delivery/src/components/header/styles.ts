@@ -55,7 +55,7 @@ export const HeaderContainer = styled.header`
 
 
       &.active {
-        color: green;
+        //color: green;
       }
     }
   }

@@ -11,7 +11,7 @@ export function Header() {
         <NavLink to="/" title="Timer">
           <MapPin size={24}   /> <label htmlFor="textLocation">Cotia, SP</label>
         </NavLink>
-        <NavLink to="/cart" title="Histórico">
+        <NavLink to="/checkout" title="Histórico">
           <ShoppingCart size={24} />
         </NavLink>
       </nav>
