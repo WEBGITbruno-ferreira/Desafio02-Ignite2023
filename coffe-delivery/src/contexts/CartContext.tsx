@@ -13,19 +13,18 @@ interface CreateCartData {
   minutesAmount: number
 }
 
-interface CartsContextType {
+interface CartContextType {
  data ?: any
 }
 
-interface CartsContextProviderProps {
+interface CartContextProviderProps {
   children: ReactNode
 }
 
-export const CartContext = createContext({} as CartsContextType)
+export const CartContext = createContext({} as CartContextType)
 
-export function CartsContextProvider({
-  children,
-}: CartsContextProviderProps) {
+export function CartContextProvider({children}: CartContextProviderProps) 
+{
 
     let data = { }
 

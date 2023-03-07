@@ -4,6 +4,8 @@ export const GlobalStyle = createGlobalStyle`
 
 :root {
   //font-size: 100%; // feito de última hora, os fontes vão ficar fora do padrão do projeto
+ 
+  background-color: white;
 }
 
 * {

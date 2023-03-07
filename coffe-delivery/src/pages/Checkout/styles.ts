@@ -5,16 +5,15 @@ export const CheckoutContainer = styled.div`
   display: grid; 
   column-gap: 2rem;
   grid-template-columns: 1.5fr 1fr;
-
   align-items: top;
-  border: 1px solid blue;
+
   width: 98vw;
   margin :6.2rem  auto 0 auto; //troquei o padding por margin, vamos ver o efeito no alinhamento
-  padding: 0 5rem;
+  padding: 0 10rem;
   background-color : ${(props) => props.theme['white']};
 
 @media (max-width: 1350px) {
- 
+  padding: 0 8rem;
     }
 
     @media (max-width: 1105px) {
@@ -44,13 +43,27 @@ font-size: 18px;
 padding: 1rem 0;
 `
 
-export const PaymentContainer = styled.div`
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-margin-top: 2rem;
+
+
+export const AddressContainer = styled.div`
 background-color : ${(props) => props.theme['background']};
-padding: 3rem 3rem;
-column-gap: 1rem;
+display: grid;
+grid-template-columns: repeat(3, 1fr) 4rem;
+grid-auto-rows: min-content;
+gap: 0.8rem;
+max-height: 60vh;
+
+padding: 5rem 3rem;
+
+
+.span4{
+  grid-column: span 4;
+}
+
+.span1{
+  grid-column: span 1;
+}
+
 
  
 p{  display: flex;
@@ -62,19 +75,12 @@ p{  display: flex;
 
     p+p { font-size: 0.875rem; line-height: 2rem; padding-left: 1.2rem;}
 
-`
-
-
-export const AddresContainer = styled.div`
-background-color : ${(props) => props.theme['background']};
-display: grid;
-grid-template-columns: repeat(3, 1fr) 4rem;
-gap: 0.8rem;
-
-padding: 5rem 3rem;
-
 ` 
-
+export const LineSeparator = styled.div`
+border-bottom: 2px solid ${(props) => props.theme['base-button']};
+grid-column: span 4;
+min-height: 2rem;
+`
 export const TextInputAddress = styled.div`
 display: flex;
 flex-direction: column;
@@ -135,7 +141,9 @@ interface PaymentButtonProps {
 }
 export const PaymentTypeButton = styled.button<PaymentButtonProps> `
   width: 100%;
+  margin: 0 5px;
 
+  max-height: 50px;
   padding: 1rem;
   border-radius: 8px;
   display: flex;
@@ -179,9 +187,63 @@ export const PaymentTypeButton = styled.button<PaymentButtonProps> `
 export const TotalCartItensContainer = styled.div`
 background-color : ${(props) => props.theme['background']};
 display: grid;
-grid-template-columns: repeat(2, 1fr);
+//grid-template-columns: repeat(2, min-content);
+grid-auto-rows: min-content;
 padding: 2rem 3rem;
+border-top-right-radius: 50px;
+border-bottom-left-radius: 50px;
 
 ` 
 
+export const DivTotal = styled.div`
+grid-column: span 2;
+display: flex;
+justify-content: space-between;
+padding: 1rem 0;
+font-family: 'Roboto' ;
+font-size: 14px;
 
+.Totalize { font-weight :  bold}
+
+`
+
+export const ButtonAlingDiv = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+grid-column: span 4;
+
+`
+
+
+
+export const FinishButton = styled.button<PaymentButtonProps> `
+  width: 100%;
+  border: 0;
+  max-height: 50px;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.75rem;
+ grid-column: span 2;
+  
+    
+  color: ${(props) => props.theme['white']};
+  background: ${(props) => props.theme['yellow-dark']};
+
+    &:not(:disabled):hover {
+    background: ${(props) => props.theme['base-hover']};
+    }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  cursor: pointer;
+`

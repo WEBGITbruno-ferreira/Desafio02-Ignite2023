@@ -4,15 +4,15 @@ export const ItemMenuContainer = styled.div`
   border-bottom: 1px solid ${(props) => props.theme['base-button']};
   display: flex;  
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  align-items: top;
+  
   grid-column: span 2;
   background-color: ${(props) => props.theme['background']};
-
-  min-height: 8rem;
-  padding: 0rem 0;
-  text-align: center;
+  padding: 0 0 2rem 0;
+  text-align: left;
   justify-content: center;
+
+
 
    .productImage {
       margin: 0 3rem 0 0;
@@ -25,22 +25,22 @@ export const ItemMenuContainer = styled.div`
     width : 4rem;
     height: 4rem;
   }
-
+  
 
   h1 {
     font-family: 'Baloo 2';
     font-style: normal;
     font-weight: bold;
     font-size: 1.25rem;
-    line-height: 130%;
+
    
   }
 
   .priceAndQuant {
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     display: flex;
     flex-direction: row;
-    flex: 1;
+ 
     justify-content: center;
     align-items: center;
     max-height: 1.5rem;  
@@ -56,29 +56,11 @@ export const ItemMenuContainer = styled.div`
       }
     input { display: flex;}
 
-    .addToCart {
-      width: 3rem;
-      height: 3rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: ${(props) => props.theme['purple-dark']};
-      color: ${(props) => props.theme['white']};
-      border-radius: 6px;
-
-      &:hover {
-        background-color: ${(props) => props.theme['purple']};
-      }
-
-      &.active {
-        color: green;
-      }
-
-      circle, circle+path { fill : white}
-    }
-  
 }
+
+
 `
+
 
 
 export const MinusAndPlusSelector = styled.div`
@@ -156,4 +138,13 @@ svg { color : ${(props) => props.theme['purple']};
 }
 `
 
-export const AlignItemAndButton = styled.div``
+export const AlignPrice = styled.div`
+
+display: flex;
+justify-content: top;
+align-content: top;
+font-weight: bold;
+
+
+
+`

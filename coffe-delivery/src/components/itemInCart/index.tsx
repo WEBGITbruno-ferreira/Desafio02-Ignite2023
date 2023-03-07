@@ -1,8 +1,8 @@
-import { AlignItemAndButton, ItemMenuContainer, MinusAndPlusSelector, RemoveButton } from './styles'
+import {  AlignPrice,  ItemMenuContainer, MinusAndPlusSelector, RemoveButton } from './styles'
 
 import {  CreditCard, ShoppingCart, Trash } from 'phosphor-react'
 import { useState } from 'react'
-import { PaymentTypeButton } from '../../pages/Checkout/styles';
+
 export function ItemMenu() {
     const [quantityOfItem, setquantityOfItem] = useState(1)
     function handleAddItem() {
@@ -27,9 +27,10 @@ export function ItemMenu() {
     return (
     <>
     <ItemMenuContainer>
+
         <div className='productImage'> <img src="src\assets\Americano.png" alt="" /> </div> 
         
-        <AlignItemAndButton>
+        <div>
         <h1> Tradicional </h1>
         <div className="priceAndQuant"> 
         
@@ -42,12 +43,14 @@ export function ItemMenu() {
 
        </div> 
         
-       </AlignItemAndButton>
+       </div>
 
 
       
-
+        <AlignPrice> 
         <p className='moeda'> R$ </p > <p  className='value'> 9,90 </p > 
+        </AlignPrice>
+
 
 
 

@@ -1,16 +1,21 @@
 import { 
-    AddresContainer, 
+    AddressContainer, 
     AddressInput, 
     AreaLabel, 
     CheckoutContainer, 
     CityInput, 
     ComplementInput,      
-    PaymentContainer, 
+
     TextInputAddress, 
      BaseInput,
      PaymentTypeButton,
      
-     TotalCartItensContainer
+     TotalCartItensContainer,
+ 
+     LineSeparator,
+     DivTotal,
+     ButtonAlingDiv,
+     FinishButton
      } from "./styles"
 import { MapPinLine , CurrencyDollar, CreditCard, Bank, Money} from 'phosphor-react'
 import { ItemMenu } from "../../components/itemInCart"
@@ -27,7 +32,7 @@ export function Checkout() {
                 <AreaLabel>
                     <p> Itens selecionados </p>
                 </AreaLabel>
-                <AddresContainer>
+                <AddressContainer>
             
                     <TextInputAddress>
                         <h1> <MapPinLine size={22} />  Endereço de Entrega </h1>
@@ -43,23 +48,77 @@ export function Checkout() {
                     <CityInput placeholder="Cidade" />
                     <BaseInput placeholder="UF" />
 
-                </AddresContainer>
+                    <LineSeparator> </LineSeparator>
+
+                
+
+                    <p  className="span4 payment"> <CurrencyDollar size={22}/> Pagamento </p> 
+                    <p  className="span4 "> O Pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
+                      
+                    <ButtonAlingDiv>
+                    <PaymentTypeButton  isSelected={true} > <CreditCard size={22}/> Cartão de crédito  </PaymentTypeButton>  
+                   
+
+                  
+                    <PaymentTypeButton  isSelected={false}> <Bank size={22} /> Cartão de débito </PaymentTypeButton>   
+                
+
+                    
+                    <PaymentTypeButton  isSelected={false} >  <Money size={22} /> Dinheiro</PaymentTypeButton> 
+                    </ButtonAlingDiv>
+                 
+
+
+
+            
+                        
+
+                </AddressContainer>
+
+                
 
                 <TotalCartItensContainer> 
                     <ItemMenu/>
+                 
                     <ItemMenu/>
-                    <ItemMenu/>
-                </TotalCartItensContainer>
 
-                <PaymentContainer> 
-                    <p> <CurrencyDollar size={22}/> Pagamento </p> 
-                    <p> O Pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
-                    <PaymentTypeButton isSelected={true} > <CreditCard size={22}/> Cartão de crédito  </PaymentTypeButton>  
-                    
-                    <PaymentTypeButton isSelected={false}> <Bank size={22} /> Cartão de débito </PaymentTypeButton>   
-                    
-                    <PaymentTypeButton isSelected={false} >  <Money size={22} /> Dinheiro</PaymentTypeButton> 
-                </PaymentContainer>
+                    <ItemMenu/>
+                    <ItemMenu/>
+                 
+                 <ItemMenu/>
+
+                 <ItemMenu/>
+                 <ItemMenu/>
+                 
+                 <ItemMenu/>
+
+                 <ItemMenu/>
+
+                    <DivTotal> 
+
+                    <p> Total de itens</p>
+                    <p> R$ 50</p>
+
+                    </DivTotal> 
+                    <DivTotal>
+                    <p> Entrega</p>
+                    <p> R$ 10 </p>
+
+                    </DivTotal>
+                    <DivTotal>
+                    <p className="Totalize"> Total </p>
+                    <p className="Totalize"> R$ 60 </p>
+
+                    </DivTotal> 
+
+
+                    <FinishButton>  CONFIRMAR PEDIDO </FinishButton>
+              
+             
+
+
+                </TotalCartItensContainer>
+                
 
             </CheckoutContainer>
 
