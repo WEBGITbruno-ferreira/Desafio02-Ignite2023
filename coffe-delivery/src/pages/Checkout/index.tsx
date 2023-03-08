@@ -26,32 +26,7 @@ import { useContext, useEffect } from "react"
 export function Checkout() {
 
     const { cartListProducts } = useContext(CartContext)
-    console.log(cartListProducts)
-    useEffect(() => {
-        console.log("useEffect")
-
-
-        const novoLista = cartListProducts.reduce((soma, cur) => {
-            // guarda o nome atual e verifica se existe repetido
-            let nome = cur.tag;
-            let repetido = soma.find(elem => elem.tag === nome)
-            // se for repetido soma, caso contrário adiciona o elemento ao novo array
-            if (repetido) {
-                repetido.quantity   += cur.quantity; 
-                repetido.totalPrice += cur.price * cur.quantity;}
-            else {
-                let totalizerList = {...cur, totalPrice : cur.price * cur.quantity }
-                soma.push(totalizerList); }
-            // retorna o elemento agrupado e somado
-
-            //console.log("soma", soma)
-            return soma;
-        }, []);
-
-        console.log("novoLista", novoLista)
-    
-    }, [cartListProducts])
-
+    console.log("Checkout - Context cartListProducts", cartListProducts)
 
     return (
         <>
@@ -112,8 +87,8 @@ export function Checkout() {
 
 
                     {cartListProducts.map((it, index) => {
-
-                        return (<h1 key={index}> </h1>)
+                       
+                        return (<ItemMenu {...it} />)
                     })}
 
                     {/*<ItemMenu/>

@@ -30,14 +30,14 @@ export function ItemMenu( props : CardapioItem ) {
 
     function addToCart (data : CardapioItem, quantityToAdd : number) {
 
-        console.log(data)
         addProduct( {
             id: data.id,
-            tag: data.name,
+            tag: [],
             description: data.description,
             price: data.price,
             quantity: quantityToAdd,
-            image: data.image
+            image: data.image,
+            name: data.name
         })
         return 
     }

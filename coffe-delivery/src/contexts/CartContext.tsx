@@ -10,17 +10,14 @@ import {
 import {
   ActionTypes,
   addNewProductToCartAction,
-  removeProductFromCartAction
+  removeProductFromCartAction, 
+  refreshCartTotal
 
 } from '../reducers/cart/actions'
 
 import { Product, cartReducer, RemoveProduct } from '../reducers/cart/reducer'
 
 
-interface CreateCartData {
-  task: string
-  minutesAmount: number
-}
 
 interface CartContextType {
   cartListProducts : Product[]
@@ -63,20 +60,25 @@ return  initialState
 
     const { cartListProducts }= cartState;
 
+
     function addProduct (data : Product) {
+
       const productToAdd : Product = {
         id: data.id,
         tag: data.tag,
         description: data.description,
+        name: data.name,
         price: data.price,
         quantity: data.quantity,
         image: data.image
 
       }
 
-      console.log(productToAdd)
+      console.log("xxxxx", productToAdd)
 
       dispatch(addNewProductToCartAction(productToAdd))
+      dispatch(refreshCartTotal())
+      
 
     }
 
@@ -88,6 +90,7 @@ return  initialState
       }
 
       dispatch(removeProductFromCartAction(productToRemove))
+      dispatch(refreshCartTotal())
     }
 
   return (

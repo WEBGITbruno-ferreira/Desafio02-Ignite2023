@@ -1,13 +1,27 @@
 import {  AlignPrice,  ItemCartContainer, MinusAndPlusSelector, RemoveButton } from './styles'
 
 import {  CreditCard, ShoppingCart, Trash } from 'phosphor-react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { CardapioItem } from '../cardapio';
+import { CartContext } from '../../contexts/CartContext';
 
 export function ItemMenu( props : CardapioItem) {
     const [quantityOfItem, setquantityOfItem] = useState(1)
-    function handleAddItem() {
-        let actualQuantity = quantityOfItem;
+
+    
+    const  {cartListProducts, addProduct} = useContext(CartContext)
+
+
+    function handleAddItem(data : CardapioItem) {
+        addProduct( {
+            id: data.id,
+            tag: [],
+            description: data.description,
+            price: data.price,
+            quantity: 1,
+            image: data.image,
+            name: data.name
+        })
         setquantityOfItem (quantityOfItem+1)
         return 'x'
     }
@@ -19,26 +33,23 @@ export function ItemMenu( props : CardapioItem) {
        
     }
 
-    function addToCart() {
-        alert('item add to cart')
-        return 
-    }
+
 
 
     return (
-    <>
+    <> {console.log("Itemincart", props)}
     <ItemCartContainer>
 
-        <div className='productImage'> <img src="src\assets\Americano.png" alt="" /> </div> 
+        <div className='productImage'> <img src={"src\\assets\\"+props.image+".png"} alt="" /> </div> 
         
         <div>
-        <h1> Tradicional </h1>
+        <h1> {props.name} </h1>
         <div className="priceAndQuant"> 
         
         <MinusAndPlusSelector className="number">
             <span onClick={() => handleSubItem()} className="minus">-</span>
-            <input type="text" onChange={()=> {}} value={quantityOfItem}/>
-            <span onClick={() => handleAddItem()} className="plus">+</span>
+            <input type="text" onChange={()=> {}} value={props.quantity}/>
+            <span onClick={() => handleAddItem(props)} className="plus">+</span>
         </MinusAndPlusSelector>
         <RemoveButton  > <Trash size={22}/>REMOVER</RemoveButton>  
 
@@ -49,7 +60,7 @@ export function ItemMenu( props : CardapioItem) {
 
       
         <AlignPrice> 
-        <p className='moeda'> R$ </p > <p  className='value'> 9,90 </p > 
+        <p className='moeda'> R$ </p > <p  className='value'> {props.price}</p > 
         </AlignPrice>
 
 
