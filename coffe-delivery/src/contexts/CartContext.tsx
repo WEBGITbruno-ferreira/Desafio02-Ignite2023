@@ -10,7 +10,7 @@ import {
 import {
   ActionTypes,
   addNewProductToCartAction,
-  removeProductFromCartAction, 
+  subProductFromCartAction, 
   refreshCartTotal
 
 } from '../reducers/cart/actions'
@@ -89,7 +89,7 @@ return  initialState
 
       }
 
-      dispatch(removeProductFromCartAction(productToRemove))
+      dispatch(subProductFromCartAction(productToRemove))
       dispatch(refreshCartTotal())
     }
 

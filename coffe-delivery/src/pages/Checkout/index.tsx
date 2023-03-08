@@ -28,6 +28,10 @@ export function Checkout() {
     const { cartListProducts } = useContext(CartContext)
     console.log("Checkout - Context cartListProducts", cartListProducts)
 
+    const totalValueItens = cartListProducts.reduce((soma, currentItem) => soma + (currentItem.price * currentItem.quantity ), 0 )
+    const valueShipping = 10;
+
+
     return (
         <>
 
@@ -101,17 +105,17 @@ export function Checkout() {
                     <DivTotal>
 
                         <p> Total de itens</p>
-                        <p> R$ 50</p>
+                        <p> R$ {  totalValueItens }</p>
 
                     </DivTotal>
                     <DivTotal>
                         <p> Entrega</p>
-                        <p> R$ 10 </p>
+                        <p> R$ {valueShipping} </p>
 
                     </DivTotal>
                     <DivTotal>
                         <p className="Totalize"> Total </p>
-                        <p className="Totalize"> R$ 60 </p>
+                        <p className="Totalize"> R$ {totalValueItens + valueShipping} </p>
 
                     </DivTotal>
 

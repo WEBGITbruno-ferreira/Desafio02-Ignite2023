@@ -65,13 +65,15 @@ export function cartReducer(state: CartState, action: any) {
         draft.cartListProducts.push(action.payload.product)        
       })
 
-    case ActionTypes.REMOVE_ITEM_FROM_CART: {
+    case ActionTypes.SUB_ITEM_FROM_CART: {
 
-
+      console.log("REMOVE", state)
       const productIndex = state.cartListProducts.findIndex((product) => {
-        return product.id === action.payload.productid
+        console.log('action.payload.id', action.payload.removeProduct.id)
+        console.log('product.id', product.id)
+        return product.id === action.payload.removeProduct.id
       })
-
+        console.log(productIndex)
       if (productIndex < 0) {
         return state
       }

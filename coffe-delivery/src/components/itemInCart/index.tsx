@@ -7,15 +7,14 @@ import { CartContext } from '../../contexts/CartContext';
 import { Product } from '../../reducers/cart/reducer';
 
 export function ItemInCart( props : Product) {
-    const [quantityOfItem, setquantityOfItem] = useState(1)
 
     
-    const  { addProduct, cartListProducts} = useContext(CartContext)
+    const  { addProduct, removeProduct,cartListProducts} = useContext(CartContext)
 
     console.log("ItemInCart", cartListProducts)
 
     function handleAddItem(data : CardapioItem) {
-        setquantityOfItem (quantityOfItem+1)
+    
         
         addProduct( {
             id: data.id,
@@ -30,10 +29,14 @@ export function ItemInCart( props : Product) {
         return 
     }
 
-    function handleSubItem() {
-        let actualQuantity = quantityOfItem;
-        if (actualQuantity > 0) 
-        setquantityOfItem (quantityOfItem-1)
+    function handleSubItem(data : CardapioItem) {
+  
+
+
+        removeProduct({
+            id: data.id,    
+            quantity: 1     
+        })
        
     }
 
@@ -51,7 +54,7 @@ export function ItemInCart( props : Product) {
         <div className="priceAndQuant"> 
         
         <MinusAndPlusSelector className="number">
-            <span onClick={() => handleSubItem()} className="minus">-</span>
+            <span onClick={() => handleSubItem(props)} className="minus">-</span>
             <input type="text" onChange={()=> {}} value={props.quantity}/>
             <span onClick={() => handleAddItem(props)} className="plus">+</span>
         </MinusAndPlusSelector>
