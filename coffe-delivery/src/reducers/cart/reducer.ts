@@ -35,8 +35,8 @@ function refreshCarList (draftList : Array<Product>) {
 
     const listGroupedByItem = draftList.reduce((soma, cur) => {
         // guarda o nome atual e verifica se existe repetido
-        let nome = cur.tag;
-        let repetido = soma.find(elem => elem.tag === nome)
+        let nome = cur.name;
+        let repetido = soma.find(elem => elem.name === nome)
         // se for repetido soma, caso contrário adiciona o elemento ao novo array
         if (repetido) {
             repetido.quantity   += cur.quantity; 
@@ -83,9 +83,10 @@ export function cartReducer(state: CartState, action: any) {
     }
 
     case ActionTypes.REFRESH_CART_TOTAL: {
-      alert('refresh')
+      
       return produce(state, (draft) => {
-        
+        alert('refreshHHH')
+        console.log('REFH', state)
         draft.cartListProducts = refreshCarList(draft.cartListProducts)
       })
     }

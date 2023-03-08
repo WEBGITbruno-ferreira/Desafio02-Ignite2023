@@ -13,7 +13,6 @@ export function ItemMenu( props : CardapioItem ) {
 
     const  {addProduct } = useContext(CartContext)
 
-    //console.log(props)
 
     function handleAddItem() {
         let actualQuantity = quantityOfItem;

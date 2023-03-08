@@ -4,15 +4,19 @@ import {  CreditCard, ShoppingCart, Trash } from 'phosphor-react'
 import { useContext, useState } from 'react'
 import { CardapioItem } from '../cardapio';
 import { CartContext } from '../../contexts/CartContext';
+import { Product } from '../../reducers/cart/reducer';
 
-export function ItemMenu( props : CardapioItem) {
+export function ItemInCart( props : Product) {
     const [quantityOfItem, setquantityOfItem] = useState(1)
 
     
-    const  {cartListProducts, addProduct} = useContext(CartContext)
+    const  { addProduct, cartListProducts} = useContext(CartContext)
 
+    console.log("ItemInCart", cartListProducts)
 
     function handleAddItem(data : CardapioItem) {
+        setquantityOfItem (quantityOfItem+1)
+        
         addProduct( {
             id: data.id,
             tag: [],
@@ -22,8 +26,8 @@ export function ItemMenu( props : CardapioItem) {
             image: data.image,
             name: data.name
         })
-        setquantityOfItem (quantityOfItem+1)
-        return 'x'
+      
+        return 
     }
 
     function handleSubItem() {
@@ -37,7 +41,7 @@ export function ItemMenu( props : CardapioItem) {
 
 
     return (
-    <> {console.log("Itemincart", props)}
+    <> {/*console.log("Itemincart", props)*/}
     <ItemCartContainer>
 
         <div className='productImage'> <img src={"src\\assets\\"+props.image+".png"} alt="" /> </div> 

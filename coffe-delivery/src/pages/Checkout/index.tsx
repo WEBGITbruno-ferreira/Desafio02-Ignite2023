@@ -18,7 +18,7 @@ import {
     FinishButton
 } from "./styles"
 import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money } from 'phosphor-react'
-import { ItemMenu } from "../../components/itemInCart"
+import { ItemInCart } from "../../components/itemInCart"
 
 import { CartContext } from '../../contexts/CartContext'
 import { useContext, useEffect } from "react"
@@ -88,7 +88,7 @@ export function Checkout() {
 
                     {cartListProducts.map((it, index) => {
                        
-                        return (<ItemMenu {...it} />)
+                        return (<ItemInCart key={index} {...it} />)
                     })}
 
                     {/*<ItemMenu/>
