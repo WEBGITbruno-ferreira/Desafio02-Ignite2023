@@ -27,7 +27,14 @@ export const ItemMenuContainer = styled.div`
     width : 7.5rem;
     height: 7.5rem;
   }
+
+  .spanAlign{
+    display: flex;
+  }
+
   span {
+    display: flex;
+    flex-direction: row;
     background-color: ${(props) => props.theme['yellow-light']};
     color : ${(props) => props.theme['yellow-dark']};
     padding : 0.3rem 0.5rem;
@@ -36,7 +43,7 @@ export const ItemMenuContainer = styled.div`
     font-style: normal;
     font-weight: 700;
     font-size: 0.8rem;
-    margin: 1rem auto;
+    
     
   }
 
@@ -101,7 +108,6 @@ export const ItemMenuContainer = styled.div`
   
 }
 `
-
 
 export const MinusAndPlusSelector = styled.div`
       span {

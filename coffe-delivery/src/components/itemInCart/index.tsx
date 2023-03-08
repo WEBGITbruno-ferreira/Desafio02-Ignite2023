@@ -1,9 +1,10 @@
-import {  AlignPrice,  ItemMenuContainer, MinusAndPlusSelector, RemoveButton } from './styles'
+import {  AlignPrice,  ItemCartContainer, MinusAndPlusSelector, RemoveButton } from './styles'
 
 import {  CreditCard, ShoppingCart, Trash } from 'phosphor-react'
 import { useState } from 'react'
+import { CardapioItem } from '../cardapio';
 
-export function ItemMenu() {
+export function ItemMenu( props : CardapioItem) {
     const [quantityOfItem, setquantityOfItem] = useState(1)
     function handleAddItem() {
         let actualQuantity = quantityOfItem;
@@ -26,7 +27,7 @@ export function ItemMenu() {
 
     return (
     <>
-    <ItemMenuContainer>
+    <ItemCartContainer>
 
         <div className='productImage'> <img src="src\assets\Americano.png" alt="" /> </div> 
         
@@ -54,7 +55,7 @@ export function ItemMenu() {
 
 
 
-    </ItemMenuContainer>
+    </ItemCartContainer>
 
     </>
     )

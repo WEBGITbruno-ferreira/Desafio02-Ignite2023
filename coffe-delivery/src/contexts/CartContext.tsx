@@ -65,11 +65,12 @@ return  initialState
 
     function addProduct (data : Product) {
       const productToAdd : Product = {
-        id: (Math.random() * 21).toString(),
+        id: data.id,
         tag: data.tag,
         description: data.description,
         price: data.price,
-        quantity: data.quantity
+        quantity: data.quantity,
+        image: data.image
 
       }
 

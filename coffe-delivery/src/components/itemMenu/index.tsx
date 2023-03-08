@@ -13,7 +13,7 @@ export function ItemMenu( props : CardapioItem ) {
 
     const  {addProduct } = useContext(CartContext)
 
-    console.log(props)
+    //console.log(props)
 
     function handleAddItem() {
         let actualQuantity = quantityOfItem;
@@ -28,29 +28,45 @@ export function ItemMenu( props : CardapioItem ) {
        
     }
 
-    function addToCart() {
+    function addToCart (data : CardapioItem, quantityToAdd : number) {
 
-        console.log('addToCart')
+        console.log(data)
         addProduct( {
-            id: '1',
-            tag: 'data.tag',
-            description: 'data.description',
-            price: 5,
-            quantity: 1
+            id: data.id,
+            tag: data.name,
+            description: data.description,
+            price: data.price,
+            quantity: quantityToAdd,
+            image: data.image
         })
         return 
     }
 
 
     return (
-    <>
+    <> {/*console.log(props.image)*/}
     <ItemMenuContainer>
-        <div className='productImage'> <img src="src\assets\Americano.png" alt="" /> </div> 
-        <span> Tradicional </span>
 
-        <h1> Tradicional </h1>
-        <h6> O tradicional café feito com água quente e grãos moídos </h6>
-        <div className="priceAndQuant"> <p className='moeda'> R$ </p > <p  className='value'> 9,90 </p > 
+
+   
+        <div className='productImage'> <img src={"src\\assets\\"+props.image+".png"} alt="" /> </div> 
+        
+        <div className='spanAlign'> 
+        { props.tag.map((tag, index)=>{
+
+
+            return (
+            <span key={index}> {tag} </span>
+            
+           )
+        })}
+        </div>
+        
+        {/*<span> Tradicional </span>*/}
+
+        <h1> {props.name} </h1>
+        <h6> {props.description}</h6>
+        <div className="priceAndQuant"> <p className='moeda'> R$ </p > <p  className='value'> {props.price} </p > 
        {/* <QuantityInput
          type="number"
          placeholder="1"
@@ -64,7 +80,7 @@ export function ItemMenu( props : CardapioItem ) {
             <input type="text" onChange={()=> {}} value={quantityOfItem}/>
             <span onClick={() => handleAddItem()} className="plus">+</span>
         </MinusAndPlusSelector>
-        <label onClick={() => addToCart()} className='addToCart'> <ShoppingCart size={22}/>  </label>
+        <label onClick={() => addToCart(props, quantityOfItem)} className='addToCart'> <ShoppingCart size={22}/>  </label>
 
 
         </div> 

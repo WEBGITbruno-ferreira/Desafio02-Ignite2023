@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ItemMenuContainer = styled.div`
+export const ItemCartContainer = styled.div`
   border-bottom: 1px solid ${(props) => props.theme['base-button']};
   display: flex;  
   flex-direction: row;
