@@ -67,7 +67,36 @@ export function cartReducer(state: CartState, action: any) {
 
     case ActionTypes.SUB_ITEM_FROM_CART: {
 
-      console.log("REMOVE", state)
+      //console.log("REMOVE", state)
+      const productIndex = state.cartListProducts.findIndex((product) => {
+        console.log('action.payload.id', action.payload.removeProduct.id)
+        console.log('product.id', product.id)
+        return product.id === action.payload.removeProduct.id
+      })
+        console.log(productIndex)
+      if (productIndex < 0) {
+        return state
+      }
+
+      return produce(state, (draft) => {
+        
+        draft.cartListProducts[productIndex].quantity -= action.payload.removeProduct.quantity
+      })
+    }
+
+    case ActionTypes.REFRESH_CART_TOTAL: {
+      
+      return produce(state, (draft) => {
+        alert('refreshHHH')
+        console.log('REFH', state)
+        draft.cartListProducts = refreshCarList(draft.cartListProducts)
+      })
+    }
+
+
+    case ActionTypes.REMOVE_ITEM_FROM_CART: {
+
+      //console.log("REMOVE", state)
       const productIndex = state.cartListProducts.findIndex((product) => {
         console.log('action.payload.id', action.payload.removeProduct.id)
         console.log('product.id', product.id)
@@ -87,11 +116,12 @@ export function cartReducer(state: CartState, action: any) {
     case ActionTypes.REFRESH_CART_TOTAL: {
       
       return produce(state, (draft) => {
-        alert('refreshHHH')
+    
         console.log('REFH', state)
         draft.cartListProducts = refreshCarList(draft.cartListProducts)
       })
     }
+
 
 
 

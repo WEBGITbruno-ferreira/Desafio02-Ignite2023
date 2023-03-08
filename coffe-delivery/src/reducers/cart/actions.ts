@@ -3,7 +3,8 @@ import { Product, RemoveProduct } from './reducer'
 export enum ActionTypes {
   ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART',
   SUB_ITEM_FROM_CART = 'SUB_ITEM_FROM_CART',
-  REFRESH_CART_TOTAL = 'REFRESH_CART_TOTAL'
+  REFRESH_CART_TOTAL = 'REFRESH_CART_TOTAL',
+  REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART'
   //criar um totalizador do carrinho
 }
 
@@ -18,6 +19,15 @@ export function subProductFromCartAction(removeProduct: RemoveProduct) {
     type: ActionTypes.SUB_ITEM_FROM_CART, payload: { removeProduct }
   }
 }
+
+
+export function removeProductFromCartAction(removeProduct: RemoveProduct) {
+  return {
+    type: ActionTypes.REMOVE_ITEM_FROM_CART, payload: { removeProduct }
+  }
+}
+
+
 
 
 export function refreshCartTotal() {

@@ -8,9 +8,10 @@ import {
 } from 'react'
 
 import {
-  ActionTypes,
+
   addNewProductToCartAction,
   subProductFromCartAction, 
+  removeProductFromCartAction,
   refreshCartTotal
 
 } from '../reducers/cart/actions'
@@ -22,7 +23,9 @@ import { Product, cartReducer, RemoveProduct } from '../reducers/cart/reducer'
 interface CartContextType {
   cartListProducts : Product[]
   addProduct: (data : Product)=> void, 
+  subProduct: (data: RemoveProduct) =>void,
   removeProduct: (data: RemoveProduct) =>void
+  
 }
 
 interface CartContextProviderProps {
@@ -82,7 +85,7 @@ return  initialState
 
     }
 
-    function removeProduct (data : RemoveProduct) {
+    function subProduct (data : RemoveProduct) {
       const productToRemove : RemoveProduct = {
         id: data.id,
         quantity: data.quantity
@@ -93,9 +96,23 @@ return  initialState
       dispatch(refreshCartTotal())
     }
 
+    
+    function removeProduct (data : RemoveProduct) {
+      const productToRemove : RemoveProduct = {
+        id: data.id,
+        quantity: data.quantity
+
+      }
+
+      dispatch(removeProductFromCartAction(productToRemove))
+      dispatch(refreshCartTotal())
+    }
+
+ 
+
   return (
     <CartContext.Provider
-      value={ {cartListProducts, addProduct, removeProduct } }
+      value={ {cartListProducts, addProduct, subProduct, removeProduct } }
     >
       {children}
     </CartContext.Provider>

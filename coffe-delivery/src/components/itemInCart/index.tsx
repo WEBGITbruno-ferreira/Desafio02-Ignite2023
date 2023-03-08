@@ -9,7 +9,7 @@ import { Product } from '../../reducers/cart/reducer';
 export function ItemInCart( props : Product) {
 
     
-    const  { addProduct, removeProduct,cartListProducts} = useContext(CartContext)
+    const  { addProduct, subProduct, removeProduct , cartListProducts} = useContext(CartContext)
 
     console.log("ItemInCart", cartListProducts)
 
@@ -33,12 +33,29 @@ export function ItemInCart( props : Product) {
   
 
 
+        subProduct({
+            id: data.id,    
+            quantity: 1     
+        })
+
+        return 
+       
+    }
+
+    
+    function handleRemoveItem(data : CardapioItem) {
+  
+
+
         removeProduct({
             id: data.id,    
             quantity: 1     
         })
+
+        return
        
     }
+
 
 
 
@@ -58,7 +75,7 @@ export function ItemInCart( props : Product) {
             <input type="text" onChange={()=> {}} value={props.quantity}/>
             <span onClick={() => handleAddItem(props)} className="plus">+</span>
         </MinusAndPlusSelector>
-        <RemoveButton  > <Trash size={22}/>REMOVER</RemoveButton>  
+        <RemoveButton  onClick={()=>handleRemoveItem(props)}> <Trash size={22}/>REMOVER</RemoveButton>  
 
        </div> 
         

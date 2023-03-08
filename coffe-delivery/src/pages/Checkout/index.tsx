@@ -29,7 +29,7 @@ export function Checkout() {
     console.log("Checkout - Context cartListProducts", cartListProducts)
 
     const totalValueItens = cartListProducts.reduce((soma, currentItem) => soma + (currentItem.price * currentItem.quantity ), 0 )
-    const valueShipping = 10;
+    const valueShipping = 5;
 
 
     return (
@@ -67,20 +67,9 @@ export function Checkout() {
 
                     <ButtonAlingDiv>
                         <PaymentTypeButton isSelected={true} > <CreditCard size={22} /> Cartão de crédito  </PaymentTypeButton>
-
-
-
                         <PaymentTypeButton isSelected={false}> <Bank size={22} /> Cartão de débito </PaymentTypeButton>
-
-
-
                         <PaymentTypeButton isSelected={false} >  <Money size={22} /> Dinheiro</PaymentTypeButton>
                     </ButtonAlingDiv>
-
-
-
-
-
 
 
                 </AddressContainer>
@@ -95,12 +84,6 @@ export function Checkout() {
                         return (<ItemInCart key={index} {...it} />)
                     })}
 
-                    {/*<ItemMenu/>
-                 <ItemMenu/>
-                 
-                 <ItemMenu/>
-
-    <ItemMenu/> */}
 
                     <DivTotal>
 
