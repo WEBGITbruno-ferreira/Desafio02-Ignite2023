@@ -7,6 +7,15 @@ import {
   useState,
 } from 'react'
 
+import {
+  ActionTypes,
+  addNewProductToCartAction,
+  removeProductFromCartAction
+
+} from '../reducers/cart/actions'
+
+import { Product, cartReducer, RemoveProduct } from '../reducers/cart/reducer'
+
 
 interface CreateCartData {
   task: string
@@ -14,7 +23,9 @@ interface CreateCartData {
 }
 
 interface CartContextType {
- data ?: any
+  cartListProducts : Product[]
+  addProduct: (data : Product)=> void, 
+  removeProduct: (data: RemoveProduct) =>void
 }
 
 interface CartContextProviderProps {
@@ -26,11 +37,61 @@ export const CartContext = createContext({} as CartContextType)
 export function CartContextProvider({children}: CartContextProviderProps) 
 {
 
-    let data = { }
+  const [cartState, dispatch] = useReducer(
+    cartReducer,
+    {
+      cartListProducts: [],
+      
+    },
+
+    
+    (initialState) => {
+//      const storedStateAsJson = localStorage.getItem(
+//        '@ignite-timer:cycles-state-1.0.0',
+//      )
+//
+//      if (storedStateAsJson) {
+//        return JSON.parse(storedStateAsJson)
+//      }
+//
+//      return initialState
+
+return  initialState
+    },
+  )
+
+
+    const { cartListProducts }= cartState;
+
+    function addProduct (data : Product) {
+      const productToAdd : Product = {
+        id: (Math.random() * 21).toString(),
+        tag: data.tag,
+        description: data.description,
+        price: data.price,
+        quantity: data.quantity
+
+      }
+
+      console.log(productToAdd)
+
+      dispatch(addNewProductToCartAction(productToAdd))
+
+    }
+
+    function removeProduct (data : RemoveProduct) {
+      const productToRemove : RemoveProduct = {
+        id: data.id,
+        quantity: data.quantity
+
+      }
+
+      dispatch(removeProductFromCartAction(productToRemove))
+    }
 
   return (
     <CartContext.Provider
-      value={ data}
+      value={ {cartListProducts, addProduct, removeProduct } }
     >
       {children}
     </CartContext.Provider>

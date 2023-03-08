@@ -2,9 +2,19 @@ import { ItemMenuContainer, MinusAndPlusSelector } from './styles'
 
 import {  ShoppingCart } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
-export function ItemMenu() {
+import { useContext, useState } from 'react'
+import { CartContext } from '../../contexts/CartContext'
+import { CardapioItem } from '../cardapio'
+
+
+
+export function ItemMenu( props : CardapioItem ) {
     const [quantityOfItem, setquantityOfItem] = useState(1)
+
+    const  {addProduct } = useContext(CartContext)
+
+    console.log(props)
+
     function handleAddItem() {
         let actualQuantity = quantityOfItem;
         setquantityOfItem (quantityOfItem+1)
@@ -19,7 +29,15 @@ export function ItemMenu() {
     }
 
     function addToCart() {
-        alert('item add to cart')
+
+        console.log('addToCart')
+        addProduct( {
+            id: '1',
+            tag: 'data.tag',
+            description: 'data.description',
+            price: 5,
+            quantity: 1
+        })
         return 
     }
 

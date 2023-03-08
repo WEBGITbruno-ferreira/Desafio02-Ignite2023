@@ -20,8 +20,17 @@ import {
 import { MapPinLine , CurrencyDollar, CreditCard, Bank, Money} from 'phosphor-react'
 import { ItemMenu } from "../../components/itemInCart"
 
+import {CartContext} from '../../contexts/CartContext'
+import { useContext, useEffect } from "react"
+
 export function Checkout() {
 
+    const  { cartListProducts } = useContext(CartContext)
+    console.log(cartListProducts)
+    useEffect(()=> {
+
+        console.log('useEffect, mudou a lista ')
+    }, [cartListProducts])
     return (
         <>
 
