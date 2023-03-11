@@ -4,7 +4,6 @@ export const CardapioContainer = styled.div`
   //display: flex;
   align-items: center;
 
-  border: 1px solid red;
   padding: 0 15rem;
   width: 98vw;
   max-width: 98vw;

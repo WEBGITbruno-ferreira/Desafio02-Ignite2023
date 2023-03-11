@@ -1,3 +1,19 @@
+
+
+import { useNavigate } from 'react-router-dom';
+import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money, UserFocus } from 'phosphor-react'
+import { ItemInCart } from "../../components/itemInCart"
+
+import { CartContext } from '../../contexts/CartContext'
+import { useContext, useEffect, useState } from "react"
+
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver,  } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
     AddressContainer,
     AddressInput,
@@ -14,20 +30,6 @@ import {
     ButtonAlingDiv,
     FinishButton
 } from "./styles"
-
-
-import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money, UserFocus } from 'phosphor-react'
-import { ItemInCart } from "../../components/itemInCart"
-
-import { CartContext } from '../../contexts/CartContext'
-import { useContext, useEffect, useState } from "react"
-
-import { FormProvider, useForm } from 'react-hook-form'
-import { zodResolver,  } from '@hookform/resolvers/zod'
-import * as zod from 'zod'
-
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -48,13 +50,17 @@ const addressAndPaymentValidation = zod.object({
         .max(60, 'O ciclo deve ser no máximo 60 minutos'),*/
 })
 
-type AddressAndPaymentFormData = zod.infer<typeof addressAndPaymentValidation> // criando com base em outra variavel
+export  type AddressAndPaymentFormData = zod.infer<typeof addressAndPaymentValidation> // criando com base em outra variavel
 
 
 
 // A p
 
 export function Checkout() {
+
+    
+    const navigate = useNavigate();
+
 
     const addressForm = useForm<AddressAndPaymentFormData>({
         resolver: zodResolver(addressAndPaymentValidation),
@@ -79,7 +85,7 @@ export function Checkout() {
 
     const [typeOfPayment, setTypeOfPayment] = useState('')
 
-    const { handleSubmit, watch, reset, register } = addressForm
+    const { handleSubmit, watch, reset, register, setValue } = addressForm
 
     const { cartListProducts } = useContext(CartContext)
     console.log("Checkout - Context cartListProducts", cartListProducts)
@@ -96,8 +102,7 @@ export function Checkout() {
         const Cidade = watch('Cidade')
         const UF= watch('UF')
 
-    
-        const validateComplete  = addressAndPaymentValidation.safeParse({
+        let jsonAddresObj = {
             CEP, 
             Rua, 
             Numero, 
@@ -106,7 +111,9 @@ export function Checkout() {
             Cidade, 
             UF , 
             typeOfPayment           
-        })
+        }
+    
+        const validateComplete  = addressAndPaymentValidation.safeParse(jsonAddresObj)
 
 
        if (!validateComplete.success) {
@@ -117,8 +124,41 @@ export function Checkout() {
 
        } else {
         console.log("ELSE",  validateComplete)
+
+        
+            const listItensJson = JSON.stringify(jsonAddresObj);
+            localStorage.setItem('@ignite-coffe-delivery:addresdOrder-1.0.0', listItensJson)
+           
+            navigate('/ordercomplete');;
        }
     }
+
+
+
+    useEffect(()=> {
+        let storedAddressString = localStorage.getItem('@ignite-coffe-delivery:addresdOrder-1.0.0',   )
+
+          if(storedAddressString) {
+          let defaultAddresObj  = JSON.parse(storedAddressString)
+
+           setValue('CEP', defaultAddresObj.CEP)
+           setValue('Rua', defaultAddresObj.Rua)
+           setValue('Numero', defaultAddresObj.Numero)
+           setValue('Complemento', defaultAddresObj.Complemento)
+           setValue('Bairro', defaultAddresObj.Bairro)
+           setValue('Cidade', defaultAddresObj.Cidade)
+           setValue('UF', defaultAddresObj.UF)
+           setValue('typeOfPayment', defaultAddresObj.typeOfPayment)           
+           setTypeOfPayment(defaultAddresObj.typeOfPayment)
+          
+        }
+
+        
+            
+
+    }, [])
+
+
 
     return (
         <>

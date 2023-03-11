@@ -17,7 +17,7 @@ export function Header() {
         <NavLink to="/"> <img src={logoCoffe} alt=""  /> </NavLink>
       <nav>
     
-        <NavLink to="/" title="Timer">
+        <NavLink to="/ordercomplete" title="Location">
           <MapPin size={24}   /> <label htmlFor="textLocation">Cotia, SP</label>
         </NavLink>
         <NavLink to="/checkout" title="CheckouCart">

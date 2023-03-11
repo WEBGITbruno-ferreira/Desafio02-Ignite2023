@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 
 export const HomeContainer = styled.main`
-  border: 3px solid green;
+
   display: inline-flex;
   overflow: hidden;
   flex-wrap: nowrap;  
@@ -10,7 +10,6 @@ export const HomeContainer = styled.main`
   align-items: flex-start;
   justify-content: center;
  
-  border: 1px solid green;
   width: 100vw;
   height: 25.75rem;
   padding :0  15rem 0 15rem;
@@ -119,6 +118,10 @@ export const HomeContainer = styled.main`
     height: 80%;
     display: flex;
     justify-content: center;
+
+    img{
+      width: 100%;
+    height:  auto}
     
   
   }
