@@ -37,10 +37,31 @@ export const HeaderContainer = styled.header`
 
     }
 
+    
+    .numberInCart { color: black;
+      position: relative;
+      display: flex;
+      width: 25px;
+      height: 18px;
+      top: -23px;
+      right: -7px;
+      font-size: 0.8rem;
+      background-color: ${(props) => props.theme['yellow-dark']};
+      border-radius: 200px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: ${(props) => props.theme['white']};
+
+  }
+
     a+a{
       width: 3rem;
       color: ${(props) => props.theme['yellow-dark']}; 
       background-color: ${(props) => props.theme['yellow-light']}; 
+      justify-content: center;
+      align-items: center;
+      padding-left: 0.9rem;
 
       
       circle { fill : ${(props) => props.theme['yellow-dark']}}

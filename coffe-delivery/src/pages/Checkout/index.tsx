@@ -5,32 +5,120 @@ import {
     CheckoutContainer,
     CityInput,
     ComplementInput,
-
     TextInputAddress,
     BaseInput,
     PaymentTypeButton,
-
     TotalCartItensContainer,
-
     LineSeparator,
     DivTotal,
     ButtonAlingDiv,
     FinishButton
 } from "./styles"
-import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money } from 'phosphor-react'
+
+
+import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money, UserFocus } from 'phosphor-react'
 import { ItemInCart } from "../../components/itemInCart"
 
 import { CartContext } from '../../contexts/CartContext'
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
+
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver,  } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
+const addressAndPaymentValidation = zod.object({
+    CEP: zod.string().min(8, 'Informe o cep'),
+    Rua: zod.string().min(1, 'Informe a rua'),
+    Numero: zod.string().min(1, 'Informe o Número'),
+    Complemento: zod.string().optional(), 
+    Bairro: zod.string().min(1, 'Informe o bairro'),
+    Cidade: zod.string().min(1, 'Informe a cidade'),
+    UF: zod.string().min(1, 'Informe a UF').max(2, 'Informe a UF'),
+    typeOfPayment: zod.string().min(5, 'Selecione o tipo de pagamento')
+
+    /*
+    minutesAmount: zod
+        .number()
+        .min(1)
+        .max(60, 'O ciclo deve ser no máximo 60 minutos'),*/
+})
+
+type AddressAndPaymentFormData = zod.infer<typeof addressAndPaymentValidation> // criando com base em outra variavel
+
+
+
+// A p
 
 export function Checkout() {
+
+    const addressForm = useForm<AddressAndPaymentFormData>({
+        resolver: zodResolver(addressAndPaymentValidation),
+        defaultValues: {
+            CEP: '',
+            Rua: '', 
+            Numero: '',
+            Complemento: '', 
+            Bairro: '', 
+            Cidade: '', 
+            UF: '', 
+            typeOfPayment: ''
+            
+        },
+    })
+
+    function handleCreateNewCycle(data: AddressAndPaymentFormData) {
+        //   console.log(data)
+      // createNewCycle(data)
+        reset()
+      }
+
+    const [typeOfPayment, setTypeOfPayment] = useState('')
+
+    const { handleSubmit, watch, reset, register } = addressForm
 
     const { cartListProducts } = useContext(CartContext)
     console.log("Checkout - Context cartListProducts", cartListProducts)
 
-    const totalValueItens = cartListProducts.reduce((soma, currentItem) => soma + (currentItem.price * currentItem.quantity ), 0 )
+    const totalValueItens = cartListProducts.reduce((soma, currentItem) => soma + (currentItem.price * currentItem.quantity), 0)
     const valueShipping = 5;
 
+    function validateOrder() {
+        const CEP = watch('CEP')
+        const Rua = watch('Rua')
+        const Numero= watch('Numero')
+        const Complemento = watch('Complemento')
+        const Bairro= watch('Bairro')
+        const Cidade = watch('Cidade')
+        const UF= watch('UF')
+
+    
+        const validateComplete  = addressAndPaymentValidation.safeParse({
+            CEP, 
+            Rua, 
+            Numero, 
+            Complemento, 
+            Bairro, 
+            Cidade, 
+            UF , 
+            typeOfPayment           
+        })
+
+
+       if (!validateComplete.success) {
+           let xerror = validateComplete.error
+           const zoderr = JSON.parse(xerror)
+           console.log(zoderr)
+           toast(zoderr[0].message+" corretamente")
+
+       } else {
+        console.log("ELSE",  validateComplete)
+       }
+    }
 
     return (
         <>
@@ -42,45 +130,64 @@ export function Checkout() {
                 <AreaLabel>
                     <p> Itens selecionados </p>
                 </AreaLabel>
-                <AddressContainer>
+            
+                <FormProvider {...addressForm}>
+                    <AddressContainer>
 
-                    <TextInputAddress>
-                        <h1> <MapPinLine size={22} />  Endereço de Entrega </h1>
-                        <h3>  Informe o endereço onde deseja receber seu pedido</h3>
-                    </TextInputAddress>
-                    <BaseInput placeholder="CEP" />
+                        <TextInputAddress
 
-                    <AddressInput placeholder="Rua" />
-                    <BaseInput placeholder="Número" />
-                    <ComplementInput placeholder="Complemento" />
+                        >
+                            <h1> <MapPinLine size={22} />  Endereço de Entrega </h1>
+                            <h3>  Informe o endereço onde deseja receber seu pedido</h3>
+                        </TextInputAddress>
+                        <BaseInput 
+                            placeholder="CEP"
+                            id="CEP"
+                            {...register('CEP')}
+                        />
 
-                    <BaseInput placeholder="Bairro" />
-                    <CityInput placeholder="Cidade" />
-                    <BaseInput placeholder="UF" />
+                        <AddressInput placeholder="Rua"
+                            {...register('Rua')} />
 
-                    <LineSeparator> </LineSeparator>
+                        <BaseInput placeholder="Número"
+                            {...register('Numero')}
+                        />
+
+                        <ComplementInput placeholder="Complemento" 
+                            {...register('Complemento')}
+                        />
+
+                        <BaseInput placeholder="Bairro" 
+                            {...register('Bairro')}
+                        />
+                        <CityInput placeholder="Cidade" 
+                             {...register('Cidade')}
+                        />
+                        <BaseInput placeholder="UF"
+                             {...register('UF')}
+                        />
+
+                        <LineSeparator> </LineSeparator>
+
+                        <p className="span4 payment"> <CurrencyDollar size={22} /> Pagamento </p>
+                        <p className="span4 "> O Pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
+
+                        <ButtonAlingDiv>
+                            <PaymentTypeButton onClick={()=>setTypeOfPayment("creditCardSelected")} isSelected={"creditCardSelected" === typeOfPayment} > <CreditCard size={22} /> Cartão de crédito  </PaymentTypeButton>
+                            <PaymentTypeButton onClick={()=>setTypeOfPayment("debitCardSelected")} isSelected={"debitCardSelected" === typeOfPayment}> <Bank size={22} /> Cartão de débito </PaymentTypeButton>
+                            <PaymentTypeButton onClick={()=>setTypeOfPayment("moneySelected")} isSelected={"moneySelected" === typeOfPayment} >  <Money size={22} /> Dinheiro</PaymentTypeButton>
+                        </ButtonAlingDiv>
 
 
-
-                    <p className="span4 payment"> <CurrencyDollar size={22} /> Pagamento </p>
-                    <p className="span4 "> O Pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
-
-                    <ButtonAlingDiv>
-                        <PaymentTypeButton isSelected={true} > <CreditCard size={22} /> Cartão de crédito  </PaymentTypeButton>
-                        <PaymentTypeButton isSelected={false}> <Bank size={22} /> Cartão de débito </PaymentTypeButton>
-                        <PaymentTypeButton isSelected={false} >  <Money size={22} /> Dinheiro</PaymentTypeButton>
-                    </ButtonAlingDiv>
-
-
-                </AddressContainer>
-
+                    </AddressContainer>
+             
 
 
                 <TotalCartItensContainer>
 
 
                     {cartListProducts.map((it, index) => {
-                       
+
                         return (<ItemInCart key={index} {...it} />)
                     })}
 
@@ -88,28 +195,32 @@ export function Checkout() {
                     <DivTotal>
 
                         <p> Total de itens</p>
-                        <p> R$ {  totalValueItens }</p>
+                        <p>  {totalValueItens.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
 
                     </DivTotal>
                     <DivTotal>
                         <p> Entrega</p>
-                        <p> R$ {valueShipping} </p>
+                        <p> {valueShipping.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} </p>
 
                     </DivTotal>
                     <DivTotal>
                         <p className="Totalize"> Total </p>
-                        <p className="Totalize"> R$ {totalValueItens + valueShipping} </p>
+                        <p className="Totalize"> {(totalValueItens + valueShipping).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} </p>
 
                     </DivTotal>
 
 
-                    <FinishButton>  CONFIRMAR PEDIDO </FinishButton>
+                    <FinishButton onClick={()=>validateOrder()}>  CONFIRMAR PEDIDO </FinishButton>
 
 
 
 
                 </TotalCartItensContainer>
 
+                </FormProvider>
+          
+          
+                <ToastContainer />
 
             </CheckoutContainer>
 

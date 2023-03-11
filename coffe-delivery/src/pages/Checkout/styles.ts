@@ -1,4 +1,6 @@
+import { MouseEventHandler } from "react";
 import styled from "styled-components";
+
 
 export const CheckoutContainer = styled.div`
 
@@ -138,6 +140,7 @@ export const CityInput = styled(BaseInput)`
 `
 interface PaymentButtonProps {
   isSelected ?: boolean;
+  onClick : MouseEventHandler<HTMLButtonElement>
 }
 export const PaymentTypeButton = styled.button<PaymentButtonProps> `
   width: 100%;

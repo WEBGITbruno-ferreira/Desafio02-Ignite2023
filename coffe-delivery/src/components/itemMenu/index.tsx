@@ -65,7 +65,7 @@ export function ItemMenu( props : CardapioItem ) {
 
         <h1> {props.name} </h1>
         <h6> {props.description}</h6>
-        <div className="priceAndQuant"> <p className='moeda'> R$ </p > <p  className='value'> {props.price} </p > 
+        <div className="priceAndQuant"> <p  className='value'> {(props.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} </p > 
        {/* <QuantityInput
          type="number"
          placeholder="1"

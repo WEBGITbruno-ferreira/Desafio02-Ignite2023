@@ -84,7 +84,7 @@ export function ItemInCart( props : Product) {
 
       
         <AlignPrice> 
-        <p className='moeda'> R$ </p > <p  className='value'> {props.price}</p > 
+         <p  className='value'> {props.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p > 
         </AlignPrice>
 
 
