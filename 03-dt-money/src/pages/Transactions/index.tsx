@@ -1,37 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { SearchForm } from "../../components/SearchForm";
 import { Summary } from "../../components/Summary";
+import { TransactionsContext } from "../../context/TransactionContext";
 import { PriceHighLight, TransactionsContainer, TransactionsTable } from "./style";
 
-interface Transaction {
-   id: number; 
-   description:string;
-   type: 'income' | 'outcome';
-   price: number;
-   category: string;
-   createAt: string;
-
-}
 
 
 export function Transactions() {
 
-   const [transactions, setTransactions] = useState<Transaction[]>([]);
-   async function loadTransactions() {
-
-      await fetch('http://localhost:3335/transactions')
-         .then(response => response.json())
-         .then(data => setTransactions(data))
-
-
-   }
-
-   useEffect(() => {
-      loadTransactions()
-      
-
-   }, []);
+   const {transactions} = useContext(TransactionsContext)
 
    return (<div>
 
@@ -58,33 +36,6 @@ export function Transactions() {
                   )
                } )}
 
-               <tr>
-                  <td width="50%"> Desenvolimento de site</td>
-                  <td ><PriceHighLight variant='income'> R$ 12.000,00 </PriceHighLight></td>
-                  <td > Venda</td>
-                  <td > 13/04/2022</td>
-               </tr>
-
-               <tr>
-                  <td width="50%"> Hamburguer</td>
-                  <td ><PriceHighLight variant='outcome'>  -R$ 12,00 </PriceHighLight> </td>
-                  <td > Alimentação</td>
-                  <td > 13/04/2022</td>
-               </tr>
-
-               <tr>
-                  <td width="50%"> Curso</td>
-                  <td ><PriceHighLight variant='outcome'>  -R$ 8000,00 </PriceHighLight></td>
-                  <td > Aprendizado</td>
-                  <td > 13/04/2022</td>
-               </tr>
-
-               <tr>
-                  <td width="50%"> Nota</td>
-                  <td > <PriceHighLight variant='income'> R$ 14.000,00 </PriceHighLight></td>
-                  <td > Job</td>
-                  <td > 13/04/2022</td>
-               </tr>
             </tbody>
          </TransactionsTable>
 
