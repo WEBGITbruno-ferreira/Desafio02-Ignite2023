@@ -1,12 +1,18 @@
 import { SearchFormContainer } from "./styles";
 import {MagnifyingGlass} from 'phosphor-react'
+import { useForm } from "react-hook-form";
 
 export function  SearchForm () {
 
+  const {register, handleSubmit} = useForm()
   return (
 
     <SearchFormContainer> 
-      <input type="text" placeholder="Busque por transações"/>
+      <input 
+        type="text" 
+        placeholder="Busque por transações"
+        {...register("query")}
+        />
 
       <button type="submit">
       <MagnifyingGlass size={20}/> 
