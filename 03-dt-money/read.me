@@ -166,7 +166,7 @@ Evitar que alguma  função seja recriada, observando somente a necessidade
 de acordo com o array de dependencies
 
 
-04 - Aplicando o useMemo
+04 - Aplicando o MEMO
 
 Pq um componente renderiza.. 
 
@@ -179,6 +179,18 @@ qual o fluxo de render?
 Primeiro  o react recria o html da interface do comp. 
 Segundo, compara a versão do html criada com a versão anterior 
 terceiro, se algo mudou, ele reescreve o HTML na tela  
+
+o Memo : 
+ Passo 0
+ 0.0 - Hooks changed, Props Changed ( deep comparison)
+ 0.1 - Comparar a versão anterior dos hooks e props]
+ 0.2 = SE mudou algo, ele vai permitir a nova renderizacao
+
+ useMemo
+
+ Evitar recriar variaveis 
+
+
 
 
 
